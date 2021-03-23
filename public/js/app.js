@@ -22734,7 +22734,32 @@ __webpack_require__.r(__webpack_exports__);
         value: 'card',
         label: 'Card'
       }],
-      value: '',
+      tableData: [{
+        item_no: '1',
+        item: 'Pineapple',
+        qty: '1.7 Kg',
+        unit_price: 100,
+        total: 170
+      }, {
+        item_no: '2',
+        item: 'Pineapple Jam',
+        qty: '2 Nos',
+        unit_price: 250,
+        total: 500
+      }, {
+        item_no: '3',
+        item: 'Avacado',
+        qty: '0.5 Kg',
+        unit_price: 100,
+        total: 50
+      }, {
+        item_no: '4',
+        item: 'Grapes',
+        qty: '0.5 Kg',
+        unit_price: 500,
+        total: 250
+      }],
+      value: 'cash',
       product: '',
       barcode: ''
     };
@@ -27067,7 +27092,7 @@ var _hoisted_4 = {
   "class": "bg-white overflow-hidden shadow-xl sm:rounded-lg p-5 flex flex-col md:flex-row gap-4"
 };
 var _hoisted_5 = {
-  "class": "flex flex-grow flex-col gap-4"
+  "class": "flex flex-grow flex-col gap-4 shadow p-4"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Product");
@@ -27076,25 +27101,31 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Scan");
 
-var _hoisted_9 = {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full border border-blue-300 rounded p-4 tracking-wide\"><h2 class=\"font-bold text-gray-600\">Payment</h2><div class=\"grid grid-cols-6 gap-2 mt-3 text-gray-700\"><div>Total Lines</div><div>4</div><div class=\"col-start-4 col-span-2 text-right\">Sub Total</div><div class=\"text-right\">970.00</div><div class=\"col-start-4 col-span-2 text-right\">Discount</div><div class=\"text-right\">0.00</div><div class=\"col-start-4 col-span-2 text-right font-extrabold\">Total</div><div class=\"text-right font-extrabold\">970.00</div></div><hr class=\"my-5\"><div class=\"grid grid-cols-6 gap-2 mt-3 text-gray-700\"><div class=\"bg-green-300 text-gray-800 font-extrabold text-center border border-green-500 rounded py-2\">Cash</div><div class=\"col-start-4 col-span-2 text-right\">Paid</div><div class=\"text-right\">1000.00</div><div class=\"col-start-4 col-span-2 text-right font-bold text-xl\">Balance</div><div class=\"text-right font-bold text-xl\">30.00</div></div></div>", 1);
+
+var _hoisted_10 = {
   "class": "flex flex-none flex-col flex-wrap gap-6"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "button",
-  "class": "flex-1 p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"
+  "class": "flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "el-icon-document"
 }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" New")], -1
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<button type=\"button\" class=\"flex-1 p-2 border rounded-md text-sm font-normal tracking-wide border-yellow-300 bg-yellow-100 text-yellow-500\"><i class=\"el-icon-present\"></i> Discount</button><button type=\"button\" class=\"flex-1 p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500\"><i class=\"el-icon-money\"></i> Paid</button><button type=\"button\" class=\"flex-1 p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500\"><i class=\"el-icon-printer\"></i> Print</button>", 3);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-yellow-300 bg-yellow-100 text-yellow-500\"><i class=\"el-icon-present\"></i> Discount</button><button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500\"><i class=\"el-icon-money\"></i> Paid</button><button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500\"><i class=\"el-icon-printer\"></i> Print</button>", 3);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_el_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-button");
 
   var _component_el_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-input");
+
+  var _component_el_table_column = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-table-column");
+
+  var _component_el_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-table");
 
   var _component_el_option = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-option");
 
@@ -27142,14 +27173,62 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, {
         prepend: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_8];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
+            icon: "el-icon-aim"
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [_hoisted_8];
+            }),
+            _: 1
+            /* STABLE */
+
+          })];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table, {
+        border: "",
+        stripe: "",
+        data: $data.tableData,
+        style: {
+          "width": "100%"
+        }
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "item_no",
+            label: "Item #",
+            width: "80",
+            align: "center"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "item",
+            label: "Item"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "qty",
+            label: "Qty",
+            width: "120",
+            align: "center"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "unit_price",
+            label: "Unit Price",
+            width: "140",
+            align: "right"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "total",
+            label: "Total",
+            width: "140",
+            align: "right"
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["data"]), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
         modelValue: $data.value,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.value = $event;
@@ -27174,7 +27253,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["modelValue"]), _hoisted_11])])])])];
+      , ["modelValue"]), _hoisted_12])])])])];
     }),
     _: 1
     /* STABLE */
