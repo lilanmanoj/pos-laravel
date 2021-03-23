@@ -24,6 +24,7 @@ use Inertia\Inertia;
 //     ]);
 // });
 
+// Makes login page as root page
 Route::get('/', function () {
     return Inertia::render('Auth/Login');
 });
@@ -31,3 +32,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'verified'],
+    'namespace' => '\App\Http\Controllers'
+], function () {
+    Route::get('/sales/create', 'SalesController@create')->name('sales.create');
+});
