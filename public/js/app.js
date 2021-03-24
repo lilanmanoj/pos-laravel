@@ -22291,10 +22291,10 @@ __webpack_require__.r(__webpack_exports__);
         code: '',
         name: '',
         note: '',
-        product_type_id: '',
-        is_measurable: false,
+        product_type_id: 1,
+        is_measurable: true,
         barcode_prefix: '',
-        unit_id: '',
+        unit_id: 1,
         unit_price: ''
       }
     };
@@ -26251,9 +26251,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
-                modelValue: _ctx.product_type_id,
+                modelValue: $data.form.product_type_id,
                 "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-                  return _ctx.product_type_id = $event;
+                  return $data.form.product_type_id = $event;
                 }),
                 placeholder: "Select product type"
               }, {
@@ -26319,9 +26319,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
-                modelValue: _ctx.unit_id,
+                modelValue: $data.form.unit_id,
                 "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-                  return _ctx.unit_id = $event;
+                  return $data.form.unit_id = $event;
                 }),
                 placeholder: "Select unit"
               }, {
@@ -26542,9 +26542,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
             prop: "unit_price",
             label: "Unit Price",
+            align: "right",
             width: "160"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
-            prop: "type",
+            prop: "product_type.name",
             label: "Type",
             width: "180"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {

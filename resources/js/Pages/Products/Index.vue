@@ -39,10 +39,11 @@
                         <el-table-column
                             prop="unit_price"
                             label="Unit Price"
+                            align="right"
                             width="160">
                         </el-table-column>
                         <el-table-column
-                            prop="type"
+                            prop="product_type.name"
                             label="Type"
                             width="180">
                         </el-table-column>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\ProductType;
@@ -17,7 +19,8 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::search($request->input('query'))->paginate();
+        $products = Product::search($request->input('query'))->paginate(15);
+        $products->load('productType', 'unit', 'creator');
 
         $data = [
             'items' => $products
@@ -49,7 +52,13 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        $request['created_by'] = $user->id;
+
+        Product::create($request->all());
+
+        return Redirect::route('products.index');
     }
 
     /**

@@ -33,7 +33,10 @@ class Product extends Model
         'note',
         'is_measurable',
         'barcode_prefix',
-        'unit_price'
+        'unit_price',
+        'productType',
+        'unit',
+        'creator'
     ];
 
     protected $searchable = [
