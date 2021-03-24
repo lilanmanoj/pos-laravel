@@ -23,7 +23,7 @@
                         </el-form-item>
 
                         <el-form-item label="Product Type">
-                            <el-select v-model="product_type_id" placeholder="Select product type">
+                            <el-select v-model="form.product_type_id" placeholder="Select product type">
                                 <el-option
                                 v-for="type in product_types"
                                 :key="type.id"
@@ -42,7 +42,7 @@
                         </el-form-item>
 
                         <el-form-item label="Unit">
-                            <el-select v-model="unit_id" placeholder="Select unit">
+                            <el-select v-model="form.unit_id" placeholder="Select unit">
                                 <el-option
                                 v-for="unit in units"
                                 :key="unit.id"
@@ -84,10 +84,10 @@
                     code: '',
                     name: '',
                     note: '',
-                    product_type_id: '',
-                    is_measurable: false,
+                    product_type_id: 1,
+                    is_measurable: true,
                     barcode_prefix: '',
-                    unit_id: '',
+                    unit_id: 1,
                     unit_price: ''
                 }
             }
