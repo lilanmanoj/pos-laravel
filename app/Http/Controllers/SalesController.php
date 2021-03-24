@@ -33,7 +33,9 @@ class SalesController extends Controller
             'methods' => $sale->getPaymentMethods(),
             'total_lines' => 0,
             'sub_total' => number_format(0, 2),
-            'total' => number_format(0, 2)
+            'total' => number_format(0, 2),
+            'paid' => number_format(0, 2),
+            'balance' => number_format(0, 2)
         ];
 
         return Inertia::render('Sell', $data);
@@ -131,7 +133,9 @@ class SalesController extends Controller
             'methods' => $sale->getPaymentMethods(),
             'total_lines' => count($items),
             'sub_total' => number_format($total, 2),
-            'total' => number_format($total, 2)
+            'total' => number_format($total, 2),
+            'paid' => $request->paid,
+            'balance' => $request->balance
         ];
 
         return Inertia::render('Sell', $data);

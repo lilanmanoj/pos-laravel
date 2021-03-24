@@ -78,13 +78,13 @@
                             <hr class="my-5">
 
                             <div class="grid grid-cols-6 gap-2 mt-3 text-gray-700">
-                                <div class="bg-green-300 text-gray-800 font-extrabold text-center border border-green-500 rounded py-2">Cash</div>
+                                <div class="bg-green-300 text-gray-800 font-extrabold text-center border border-green-500 rounded py-2">{{ payment_method_name }}</div>
 
                                 <div class="col-start-4 col-span-2 text-right">Paid</div>
-                                <div class="text-right">1000.00</div>
+                                <div class="text-right">{{ paid }}</div>
 
                                 <div class="col-start-4 col-span-2 text-right font-bold text-xl">Balance</div>
-                                <div class="text-right font-bold text-xl">30.00</div>
+                                <div class="text-right font-bold text-xl">{{ update_balance }}</div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                     <div class="flex flex-none flex-col flex-wrap gap-6">
                         <button @click="newSale" type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"><i class="el-icon-document"></i> New</button>
 
-                        <el-select v-model="payment_method" placeholder="Select">
+                        <el-select v-model="payment_method_code" placeholder="Select" @change="changeMethod">
                             <el-option
                                 v-for="method in methods"
                                 :key="method.value"
@@ -103,11 +103,23 @@
 
                         <button type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-yellow-300 bg-yellow-100 text-yellow-500"><i class="el-icon-present"></i> Discount</button>
 
-                        <button type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500"><i class="el-icon-money"></i> Paid</button>
+                        <button @click="openPayment" type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500"><i class="el-icon-money"></i> Paid</button>
 
                         <button type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500"><i class="el-icon-printer"></i> Print</button>
                     </div>
                 </div>
+
+                <el-dialog
+                    title="Payment"
+                    v-model="open_paid_dialog"
+                    width="30%">
+                        <el-input placeholder="Enter payment" v-model="paid" ref="payment" @keyup="onEnterPaid"></el-input>
+                        <template #footer>
+                            <span class="dialog-footer">
+                            <el-button type="primary" @click="closePayment">Ok</el-button>
+                            </span>
+                        </template>
+                </el-dialog>
             </div>
         </div>
     </app-layout>
@@ -124,14 +136,19 @@
             items: Array,
             methods: Array,
             total_lines: Number,
-            sub_total: Number,
-            total: Number
+            sub_total: String,
+            total: String,
+            paid: String,
+            balance: String
         },
         data() {
             return {
-                payment_method: 'cash',
+                payment_method_code: 'cash',
+                payment_method_name: 'Cash',
                 product: '',
-                barcode: ''
+                barcode: '',
+                open_paid_dialog: false,
+                update_balance: this.balance
             }
         },
         methods: {
@@ -143,7 +160,9 @@
             },
             scanBarcode() {
                 let data = {
-                    'items': this.items
+                    'items': this.items,
+                    'paid': this.paid,
+                    'balance': this.update_balance
                 };
 
                 this.$inertia.post(route('sales.products.barcode', this.barcode), data, {
@@ -151,6 +170,28 @@
                         this.barcode = "";
                     }
                 });
+            },
+            changeMethod() {
+                switch (this.payment_method_code) {
+                    case "cash":
+                        this.payment_method_name = "Cash";
+                    break;
+
+                    case "card":
+                        this.payment_method_name = "Card";
+                    break;
+                }
+            },
+            openPayment() {
+                this.open_paid_dialog = true;
+            },
+            closePayment() {
+                this.open_paid_dialog = false;
+                this.focusBarcode();
+            },
+            onEnterPaid() {
+                let bal = this.paid - this.total;
+                this.update_balance = bal.toFixed(2);
             }
         },
         mounted() {
