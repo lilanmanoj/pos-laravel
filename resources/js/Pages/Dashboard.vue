@@ -14,7 +14,7 @@
                     <hr>
                     <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                         <inertia-link :href="route('sales.create')" class="bg-blue-400 py-8 px-2 rounded-lg text-white font-black text-2xl text-center shadow-md"><i class="el-icon-shopping-cart-1"></i> Sell</inertia-link>
-                        <inertia-link :href="route('dashboard')" class="bg-blue-400 py-8 px-2 rounded-lg text-white font-black text-2xl text-center shadow-md"><i class="el-icon-box"></i> Products</inertia-link>
+                        <inertia-link :href="route('products.index')" class="bg-blue-400 py-8 px-2 rounded-lg text-white font-black text-2xl text-center shadow-md"><i class="el-icon-box"></i> Products</inertia-link>
                         <inertia-link :href="route('dashboard')" class="bg-blue-400 py-8 px-2 rounded-lg text-white font-black text-2xl text-center shadow-md"><i class="el-icon-truck"></i> Inventory</inertia-link>
                         <inertia-link :href="route('dashboard')" class="bg-blue-400 py-8 px-2 rounded-lg text-white font-black text-2xl text-center shadow-md"><i class="el-icon-user"></i> Users</inertia-link>
                     </div>

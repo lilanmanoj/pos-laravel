@@ -38,4 +38,6 @@ Route::group([
     'namespace' => '\App\Http\Controllers'
 ], function () {
     Route::get('/sales/create', 'SalesController@create')->name('sales.create');
+
+    Route::resource('products', 'ProductsController')->only([ 'index', 'create', 'store' ]);
 });
