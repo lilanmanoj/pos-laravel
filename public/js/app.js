@@ -26188,19 +26188,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "code",
+            label: "Code",
+            width: "160"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
             prop: "name",
-            label: "Name",
+            label: "Name"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "unit_price",
+            label: "Unit Price",
+            width: "160"
+          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
+            prop: "type",
+            label: "Type",
             width: "180"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
-            prop: "address",
-            label: "Address",
-            width: "180"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
-            prop: "fixed_no",
-            label: "Phone"
-          }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
-            prop: "mobile_no",
-            label: "Mobile"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
             fixed: "right",
             label: "Actions",

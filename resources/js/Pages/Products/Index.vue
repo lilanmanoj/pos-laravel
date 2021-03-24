@@ -28,22 +28,23 @@
                         stripe
                         style="width: 100%">
                         <el-table-column
+                            prop="code"
+                            label="Code"
+                            width="160">
+                        </el-table-column>
+                        <el-table-column
                             prop="name"
-                            label="Name"
+                            label="Name">
+                        </el-table-column>
+                        <el-table-column
+                            prop="unit_price"
+                            label="Unit Price"
+                            width="160">
+                        </el-table-column>
+                        <el-table-column
+                            prop="type"
+                            label="Type"
                             width="180">
-                        </el-table-column>
-                        <el-table-column
-                            prop="address"
-                            label="Address"
-                            width="180">
-                        </el-table-column>
-                        <el-table-column
-                            prop="fixed_no"
-                            label="Phone">
-                        </el-table-column>
-                        <el-table-column
-                            prop="mobile_no"
-                            label="Mobile">
                         </el-table-column>
                         <el-table-column
                             fixed="right"
