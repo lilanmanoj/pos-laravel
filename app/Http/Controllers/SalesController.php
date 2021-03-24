@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Sale;
 use App\Models\Product;
@@ -49,7 +50,7 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Redirect::route('sales.create');
     }
 
     /**

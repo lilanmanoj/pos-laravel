@@ -105,7 +105,7 @@
 
                         <button @click="openPayment" type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500"><i class="el-icon-money"></i> Paid</button>
 
-                        <button type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500"><i class="el-icon-printer"></i> Print</button>
+                        <button @click="saveAndPrint" type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500"><i class="el-icon-printer"></i> Print</button>
                     </div>
                 </div>
 
@@ -192,6 +192,15 @@
             onEnterPaid() {
                 let bal = this.paid - this.total;
                 this.update_balance = bal.toFixed(2);
+            },
+            saveAndPrint() {
+                let data = {
+                    'items': this.items,
+                    'paid': this.paid,
+                    'balance': this.update_balance
+                };
+
+                this.$inertia.post(route('sales.store'), data);
             }
         },
         mounted() {
