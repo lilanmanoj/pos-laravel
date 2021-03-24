@@ -58,7 +58,7 @@ class Product extends Model
      */
     public function productType()
     {
-        $this->belongsTo(ProductType::class);
+        return $this->belongsTo(ProductType::class);
     }
 
     /**
@@ -66,7 +66,7 @@ class Product extends Model
      */
     public function unit()
     {
-        $this->belongsTo(Unit::class);
+        return $this->belongsTo(Unit::class);
     }
 
     /**
@@ -74,6 +74,6 @@ class Product extends Model
      */
     public function creator()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }
