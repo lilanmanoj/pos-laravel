@@ -22801,44 +22801,42 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__.default
   },
+  props: {
+    items: Array,
+    methods: Array,
+    total_lines: Number,
+    sub_total: Number,
+    total: Number
+  },
   data: function data() {
     return {
-      options: [{
-        value: 'cash',
-        label: 'Cash'
-      }, {
-        value: 'card',
-        label: 'Card'
-      }],
-      tableData: [{
-        item_no: '1',
-        item: 'Pineapple',
-        qty: '1.7 Kg',
-        unit_price: 100,
-        total: 170
-      }, {
-        item_no: '2',
-        item: 'Pineapple Jam',
-        qty: '2 Nos',
-        unit_price: 250,
-        total: 500
-      }, {
-        item_no: '3',
-        item: 'Avacado',
-        qty: '0.5 Kg',
-        unit_price: 100,
-        total: 50
-      }, {
-        item_no: '4',
-        item: 'Grapes',
-        qty: '0.5 Kg',
-        unit_price: 500,
-        total: 250
-      }],
-      value: 'cash',
+      payment_method: 'cash',
       product: '',
       barcode: ''
     };
+  },
+  methods: {
+    newSale: function newSale() {
+      this.$inertia.get(route('sales.create'));
+    },
+    focusBarcode: function focusBarcode() {
+      this.$refs.barcode.focus();
+    },
+    scanBarcode: function scanBarcode() {
+      var _this = this;
+
+      var data = {
+        'items': this.items
+      };
+      this.$inertia.post(route('sales.products.barcode', this.barcode), data, {
+        onFinish: function onFinish() {
+          _this.barcode = "";
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.focusBarcode();
   }
 });
 
@@ -27692,22 +27690,71 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Scan");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full border border-blue-300 rounded p-4 tracking-wide\"><h2 class=\"font-bold text-gray-600\">Payment</h2><div class=\"grid grid-cols-6 gap-2 mt-3 text-gray-700\"><div>Total Lines</div><div>4</div><div class=\"col-start-4 col-span-2 text-right\">Sub Total</div><div class=\"text-right\">970.00</div><div class=\"col-start-4 col-span-2 text-right\">Discount</div><div class=\"text-right\">0.00</div><div class=\"col-start-4 col-span-2 text-right font-extrabold\">Total</div><div class=\"text-right font-extrabold\">970.00</div></div><hr class=\"my-5\"><div class=\"grid grid-cols-6 gap-2 mt-3 text-gray-700\"><div class=\"bg-green-300 text-gray-800 font-extrabold text-center border border-green-500 rounded py-2\">Cash</div><div class=\"col-start-4 col-span-2 text-right\">Paid</div><div class=\"text-right\">1000.00</div><div class=\"col-start-4 col-span-2 text-right font-bold text-xl\">Balance</div><div class=\"text-right font-bold text-xl\">30.00</div></div></div>", 1);
-
-var _hoisted_10 = {
-  "class": "flex flex-none flex-col flex-wrap gap-6"
+var _hoisted_9 = {
+  "class": "w-full border border-blue-300 rounded p-4 tracking-wide"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "button",
-  "class": "flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
-  "class": "el-icon-document"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" New")], -1
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "font-bold text-gray-600"
+}, "Payment", -1
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-yellow-300 bg-yellow-100 text-yellow-500\"><i class=\"el-icon-present\"></i> Discount</button><button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500\"><i class=\"el-icon-money\"></i> Paid</button><button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500\"><i class=\"el-icon-printer\"></i> Print</button>", 3);
+var _hoisted_11 = {
+  "class": "grid grid-cols-6 gap-2 mt-3 text-gray-700"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, "Total Lines", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-start-4 col-span-2 text-right"
+}, "Sub Total", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "text-right"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-start-4 col-span-2 text-right"
+}, "Discount", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "text-right"
+}, "0.00", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "col-start-4 col-span-2 text-right font-extrabold"
+}, "Total", -1
+/* HOISTED */
+);
+
+var _hoisted_18 = {
+  "class": "text-right font-extrabold"
+};
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr class=\"my-5\"><div class=\"grid grid-cols-6 gap-2 mt-3 text-gray-700\"><div class=\"bg-green-300 text-gray-800 font-extrabold text-center border border-green-500 rounded py-2\">Cash</div><div class=\"col-start-4 col-span-2 text-right\">Paid</div><div class=\"text-right\">1000.00</div><div class=\"col-start-4 col-span-2 text-right font-bold text-xl\">Balance</div><div class=\"text-right font-bold text-xl\">30.00</div></div>", 2);
+
+var _hoisted_21 = {
+  "class": "flex flex-none flex-col flex-wrap gap-6"
+};
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+  "class": "el-icon-document"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" New");
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-yellow-300 bg-yellow-100 text-yellow-500\"><i class=\"el-icon-present\"></i> Discount</button><button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-blue-300 bg-blue-100 text-blue-500\"><i class=\"el-icon-money\"></i> Paid</button><button type=\"button\" class=\"flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-green-300 bg-green-100 text-green-500\"><i class=\"el-icon-printer\"></i> Print</button>", 3);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_el_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("el-button");
@@ -27761,11 +27808,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         modelValue: $data.barcode,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.barcode = $event;
-        })
+        }),
+        ref: "barcode",
+        onChange: $options.scanBarcode
       }, {
         prepend: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_button, {
-            icon: "el-icon-aim"
+            icon: "el-icon-aim",
+            onClick: $options.focusBarcode
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
               return [_hoisted_8];
@@ -27773,17 +27823,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             _: 1
             /* STABLE */
 
-          })];
+          }, 8
+          /* PROPS */
+          , ["onClick"])];
         }),
         _: 1
         /* STABLE */
 
       }, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table, {
+      , ["modelValue", "onChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table, {
         border: "",
         stripe: "",
-        data: $data.tableData,
+        data: $props.items,
         style: {
           "width": "100%"
         }
@@ -27795,7 +27847,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             width: "80",
             align: "center"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
-            prop: "item",
+            prop: "name",
             label: "Item"
           }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table_column, {
             prop: "qty",
@@ -27819,19 +27871,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["data"]), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
-        modelValue: $data.value,
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return $data.value = $event;
+      , ["data"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.total_lines), 1
+      /* TEXT */
+      ), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.sub_total), 1
+      /* TEXT */
+      ), _hoisted_15, _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.total), 1
+      /* TEXT */
+      )]), _hoisted_19])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        onClick: _cache[3] || (_cache[3] = function () {
+          return $options.newSale && $options.newSale.apply($options, arguments);
+        }),
+        type: "button",
+        "class": "flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"
+      }, [_hoisted_22, _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_select, {
+        modelValue: $data.payment_method,
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.payment_method = $event;
         }),
         placeholder: "Select"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.options, function (item) {
+          return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.methods, function (method) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_el_option, {
-              key: item.value,
-              label: item.label,
-              value: item.value
+              key: method.value,
+              label: method.label,
+              value: method.value
             }, null, 8
             /* PROPS */
             , ["label", "value"]);
@@ -27844,7 +27908,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["modelValue"]), _hoisted_12])])])])];
+      , ["modelValue"]), _hoisted_24])])])])];
     }),
     _: 1
     /* STABLE */

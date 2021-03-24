@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Sale;
+use App\Models\Product;
 
 class SalesController extends Controller
 {
@@ -24,7 +26,17 @@ class SalesController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Sell');
+        $sale = new Sale();
+
+        $data = [
+            'items' => [],
+            'methods' => $sale->getPaymentMethods(),
+            'total_lines' => 0,
+            'sub_total' => number_format(0, 2),
+            'total' => number_format(0, 2)
+        ];
+
+        return Inertia::render('Sell', $data);
     }
 
     /**
@@ -81,5 +93,47 @@ class SalesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProductByBarcode($barcode, Request $request)
+    {
+        $barcodePrefix = substr($barcode, 0, 4);
+        $barcodeSuffix = (int) substr($barcode, 4);
+
+        $weightKg = $barcodeSuffix / 1000;
+
+        $product = Product::where('barcode_prefix', $barcodePrefix)->with([ 'productType', 'unit' ])->first();
+
+        $items = $request->items;
+
+        if ($product->count() > 0) {
+            $item = [
+                'item_no' => (int) count($items) + 1,
+                'name' => $product->name,
+                'qty' => round($weightKg, 3)." kg",
+                'unit_price' => number_format($product->unit_price, 2),
+                'total' => number_format($weightKg * (double) $product->unit_price, 2)
+            ];
+
+            array_push($items, $item);
+        }
+
+        $total = 0;
+
+        foreach ($items as $item) {
+            $total += (double) $item['total'];
+        }
+
+        $sale = new Sale();
+
+        $data = [
+            'items' => $items,
+            'methods' => $sale->getPaymentMethods(),
+            'total_lines' => count($items),
+            'sub_total' => number_format($total, 2),
+            'total' => number_format($total, 2)
+        ];
+
+        return Inertia::render('Sell', $data);
     }
 }

@@ -17,16 +17,16 @@
                             </template>
                         </el-input>
 
-                        <el-input placeholder="Barcode" v-model="barcode">
+                        <el-input placeholder="Barcode" v-model="barcode" ref="barcode" @change="scanBarcode">
                             <template #prepend>
-                                <el-button icon="el-icon-aim">Scan</el-button>
+                                <el-button icon="el-icon-aim" @click="focusBarcode">Scan</el-button>
                             </template>
                         </el-input>
 
                         <el-table
                             border
                             stripe
-                            :data="tableData"
+                            :data="items"
                             style="width: 100%">
                                 <el-table-column
                                     prop="item_no"
@@ -35,7 +35,7 @@
                                     align="center">
                                 </el-table-column>
                                 <el-table-column
-                                    prop="item"
+                                    prop="name"
                                     label="Item">
                                 </el-table-column>
                                 <el-table-column
@@ -63,16 +63,16 @@
 
                             <div class="grid grid-cols-6 gap-2 mt-3 text-gray-700">
                                 <div>Total Lines</div>
-                                <div>4</div>
+                                <div>{{ total_lines }}</div>
 
                                 <div class="col-start-4 col-span-2 text-right">Sub Total</div>
-                                <div class="text-right">970.00</div>
+                                <div class="text-right">{{ sub_total }}</div>
 
                                 <div class="col-start-4 col-span-2 text-right">Discount</div>
                                 <div class="text-right">0.00</div>
 
                                 <div class="col-start-4 col-span-2 text-right font-extrabold">Total</div>
-                                <div class="text-right font-extrabold">970.00</div>
+                                <div class="text-right font-extrabold">{{ total }}</div>
                             </div>
 
                             <hr class="my-5">
@@ -90,14 +90,14 @@
                     </div>
 
                     <div class="flex flex-none flex-col flex-wrap gap-6">
-                        <button type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"><i class="el-icon-document"></i> New</button>
+                        <button @click="newSale" type="button" class="flex-none p-2 border rounded-md text-sm font-normal tracking-wide border-gray-300 bg-gray-100 text-gray-500"><i class="el-icon-document"></i> New</button>
 
-                        <el-select v-model="value" placeholder="Select">
+                        <el-select v-model="payment_method" placeholder="Select">
                             <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
+                                v-for="method in methods"
+                                :key="method.value"
+                                :label="method.label"
+                                :value="method.value">
                             </el-option>
                         </el-select>
 
@@ -120,47 +120,41 @@
         components: {
             AppLayout
         },
+        props: {
+            items: Array,
+            methods: Array,
+            total_lines: Number,
+            sub_total: Number,
+            total: Number
+        },
         data() {
             return {
-                options: [
-                    {
-                        value: 'cash',
-                        label: 'Cash'
-                    }, 
-                    {
-                        value: 'card',
-                        label: 'Card'
-                    }
-                ],
-                tableData: [{
-                    item_no: '1',
-                    item: 'Pineapple',
-                    qty: '1.7 Kg',
-                    unit_price: 100,
-                    total: 170
-                }, {
-                    item_no: '2',
-                    item: 'Pineapple Jam',
-                    qty: '2 Nos',
-                    unit_price: 250,
-                    total: 500
-                }, {
-                    item_no: '3',
-                    item: 'Avacado',
-                    qty: '0.5 Kg',
-                    unit_price: 100,
-                    total: 50
-                }, {
-                    item_no: '4',
-                    item: 'Grapes',
-                    qty: '0.5 Kg',
-                    unit_price: 500,
-                    total: 250
-                }],
-                value: 'cash',
+                payment_method: 'cash',
                 product: '',
                 barcode: ''
             }
+        },
+        methods: {
+            newSale() {
+                this.$inertia.get(route('sales.create'));
+            },
+            focusBarcode() {
+                this.$refs.barcode.focus();
+            },
+            scanBarcode() {
+                let data = {
+                    'items': this.items
+                };
+
+                this.$inertia.post(route('sales.products.barcode', this.barcode), data, {
+                    onFinish: () => {
+                        this.barcode = "";
+                    }
+                });
+            }
+        },
+        mounted() {
+            this.focusBarcode();
         }
     }
 </script>
