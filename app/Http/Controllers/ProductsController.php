@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Product;
+use App\Models\ProductType;
+use App\Models\Unit;
 
 class ProductsController extends Controller
 {
@@ -31,7 +33,12 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'product_types' => ProductType::all(),
+            'units' => Unit::all()
+        ];
+
+        return Inertia::render('Products/Create', $data);
     }
 
     /**
