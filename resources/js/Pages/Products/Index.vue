@@ -22,6 +22,8 @@
                         </div>
                     </div>
 
+                    {{ items }}
+
                     <el-table
                         class="my-4"
                         :data="items.data"
@@ -64,7 +66,8 @@
                                 background
                                 layout="prev, pager, next"
                                 :page-size="items.per_page"
-                                :total="items.total">
+                                :total="items.total"
+                                @current-change="changePage">
                             </el-pagination>
                         </div>
                     </div>
@@ -87,6 +90,9 @@
         methods: {
             addNew() {
                 this.$inertia.get(route('products.create'));
+            },
+            changePage(e) {
+                this.$inertia.get(route('products.index'), { page: e });
             }
         }
     }
