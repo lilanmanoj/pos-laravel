@@ -22,8 +22,6 @@
                         </div>
                     </div>
 
-                    {{ items }}
-
                     <el-table
                         class="my-4"
                         :data="items.data"
@@ -67,7 +65,10 @@
                                 layout="prev, pager, next"
                                 :page-size="items.per_page"
                                 :total="items.total"
-                                @current-change="changePage">
+                                :current-page="items.current_page"
+                                @current-change="changePage"
+                                @prev-click="prevClicked"
+                                @next-click="nextClicked">
                             </el-pagination>
                         </div>
                     </div>
@@ -93,6 +94,12 @@
             },
             changePage(e) {
                 this.$inertia.get(route('products.index'), { page: e });
+            },
+            prevClicked() {
+                this.$inertia.get(this.items.prev_page_url);
+            },
+            nextClicked() {
+                this.$inertia.get(this.items.next_page_url);
             }
         }
     }

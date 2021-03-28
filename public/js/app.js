@@ -22339,6 +22339,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$inertia.get(route('products.index'), {
         page: e
       });
+    },
+    prevClicked: function prevClicked() {
+      this.$inertia.get(this.items.prev_page_url);
+    },
+    nextClicked: function nextClicked() {
+      this.$inertia.get(this.items.next_page_url);
     }
   }
 });
@@ -26563,9 +26569,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.items) + " ", 1
-      /* TEXT */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table, {
+      , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_el_table, {
         "class": "my-4",
         data: $props.items.data,
         stripe: "",
@@ -26633,10 +26637,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         layout: "prev, pager, next",
         "page-size": $props.items.per_page,
         total: $props.items.total,
-        onCurrentChange: $options.changePage
+        "current-page": $props.items.current_page,
+        onCurrentChange: $options.changePage,
+        onPrevClick: $options.prevClicked,
+        onNextClick: $options.nextClicked
       }, null, 8
       /* PROPS */
-      , ["page-size", "total", "onCurrentChange"])])])])])])];
+      , ["page-size", "total", "current-page", "onCurrentChange", "onPrevClick", "onNextClick"])])])])])])];
     }),
     _: 1
     /* STABLE */
